@@ -1,5 +1,6 @@
 provider "aws" {
-  region = "us-east-2"
+  region = "${var.aws_region}"
+  profile = "${var.aws_profile}"
 }
 
 resource "aws_vpc" "stage" {
@@ -12,7 +13,6 @@ resource "aws_vpc" "stage" {
 
 resource "aws_subnet" "public-2a" {
     vpc_id = "${aws_vpc.stage.id}"
-    availability_zone = "us-east-2a"
     cidr_block = "10.0.0.0/28"
 
     tags {
@@ -22,8 +22,7 @@ resource "aws_subnet" "public-2a" {
 
 resource "aws_subnet" "public-2b" {
     vpc_id = "${aws_vpc.stage.id}"
-    availability_zone = "us-east-2b"
-    cidr_block = "10.0.1.0/28"
+    cidr_block = "10.0.0.16/28"
   
     tags {
      Name = "stage-vpc-public-2b"
@@ -32,8 +31,7 @@ resource "aws_subnet" "public-2b" {
 
 resource "aws_subnet" "public-2c" {
     vpc_id = "${aws_vpc.stage.id}"
-    availability_zone = "us-east-2c"
-    cidr_block = "10.0.2.0/28"
+    cidr_block = "10.0.0.32/28"
 
     tags {
      Name = "stage-vpc-public-2c"
